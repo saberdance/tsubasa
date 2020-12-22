@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tsubasa", "tsubasa\tsubasa.csproj", "{66C61EAE-E6D1-40FF-B6C8-C68A860CF038}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug_Linux|Any CPU = Debug_Linux|Any CPU
+		Debug_Linux|x64 = Debug_Linux|x64
+		Debug_Win|Any CPU = Debug_Win|Any CPU
+		Debug_Win|x64 = Debug_Win|x64
+		Release_Linux|Any CPU = Release_Linux|Any CPU
+		Release_Linux|x64 = Release_Linux|x64
+		Release_Win|Any CPU = Release_Win|Any CPU
+		Release_Win|x64 = Release_Win|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66C61EAE-E6D1-40FF-B6C8-C68A860CF038}.Debug_Linux|Any CPU.ActiveCfg = Debug_Linux|Any CPU
+		{66C61EAE-E6D1-40FF-B6C8-C68A860CF038}.Debug_Linux|Any CPU.Build.0 = Debug_Linux|Any CPU
+		{66C61EAE-E6D1-40FF-B6C8-C68A860CF038}.Debug_Linux|x64.ActiveCfg = Debug_Linux|x64
+		{66C61EAE-E6D1-40FF-B6C8-C68A860CF038}.Debug_Linux|x64.Build.0 = Debug_Linux|x64
+		{66C61EAE-E6D1-40FF-B6C8-C68A860CF038}.Debug_Win|Any CPU.ActiveCfg = Debug_Win|Any CPU
+		{66C61EAE-E6D1-40FF-B6C8-C68A860CF038}.Debug_Win|Any CPU.Build.0 = Debug_Win|Any CPU
+		{66C61EAE-E6D1-40FF-B6C8-C68A860CF038}.Debug_Win|x64.ActiveCfg = Debug_Win|x64
+		{66C61EAE-E6D1-40FF-B6C8-C68A860CF038}.Debug_Win|x64.Build.0 = Debug_Win|x64
+		{66C61EAE-E6D1-40FF-B6C8-C68A860CF038}.Release_Linux|Any CPU.ActiveCfg = Release_Linux|Any CPU
+		{66C61EAE-E6D1-40FF-B6C8-C68A860CF038}.Release_Linux|Any CPU.Build.0 = Release_Linux|Any CPU
+		{66C61EAE-E6D1-40FF-B6C8-C68A860CF038}.Release_Linux|x64.ActiveCfg = Release_Linux|x64
+		{66C61EAE-E6D1-40FF-B6C8-C68A860CF038}.Release_Linux|x64.Build.0 = Release_Linux|x64
+		{66C61EAE-E6D1-40FF-B6C8-C68A860CF038}.Release_Win|Any CPU.ActiveCfg = Release_Win|Any CPU
+		{66C61EAE-E6D1-40FF-B6C8-C68A860CF038}.Release_Win|Any CPU.Build.0 = Release_Win|Any CPU
+		{66C61EAE-E6D1-40FF-B6C8-C68A860CF038}.Release_Win|x64.ActiveCfg = Release_Win|x64
+		{66C61EAE-E6D1-40FF-B6C8-C68A860CF038}.Release_Win|x64.Build.0 = Release_Win|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {020B2E13-6B44-42F7-A8EE-18C57EACEC26}
+	EndGlobalSection
+EndGlobal
