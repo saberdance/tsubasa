@@ -28,7 +28,9 @@ namespace tsubasa
             }
             try
             {
+#pragma warning disable CA1416 // 验证平台兼容性
                 pipeServer = new NamedPipeServerStream(Name, PipeDirection.In, 1, PipeTransmissionMode.Message, PipeOptions.Asynchronous);
+#pragma warning restore CA1416 // 验证平台兼容性
                 Logger.Log($"[Server]Pipe Server:[{Name}]Created");
                 return true;
             }

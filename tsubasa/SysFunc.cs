@@ -40,7 +40,7 @@ namespace tsubasa
             {
                 return UtilFunc.MD5String(GetMacAddr().ToLower());
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return "";
             }

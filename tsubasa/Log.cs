@@ -91,7 +91,7 @@ namespace tsubasa
                     log.Close();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
