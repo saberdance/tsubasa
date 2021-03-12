@@ -21,6 +21,17 @@ namespace tsubasa
             now = string.Format("{0:d}", System.DateTime.Now).Replace('/', '_');
             logfile = ".\\" + now + ".log";
         }
+
+        public static void Log<T>(string input)
+        {
+            Log("", $"[LOG][{typeof(T)}]{input}");
+        }
+
+        public static void Error<T>(string input)
+        {
+            Log("", $"[Error][{typeof(T)}]{input}");
+        }
+
         public static void StateOutput(string input)
         {
             Log(input);
@@ -80,7 +91,6 @@ namespace tsubasa
                 LogWriteLock.EnterWriteLock();
                 using (StreamWriter log = new StreamWriter(logFilePath, true))
                 {
-                    //FileStream fs = new FileStream(url, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);FileMode.Append
                     ///设置写数据流的起始位置为文件流的末尾
                     log.BaseStream.Seek(0, SeekOrigin.End);
                     ///写入日志内容并换行
