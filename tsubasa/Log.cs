@@ -11,7 +11,7 @@ namespace tsubasa
     public static class Logger
     {
         private static string now = string.Format("{0:d}", System.DateTime.Now).Replace('/', '_');
-        public static string logfile = ".\\" + now + ".log";
+        public static string logfile = "./" + now + ".log";
         static ReaderWriterLockSlim LogWriteLock = new ReaderWriterLockSlim();
         /// <summary>
         /// 用于跨天
@@ -19,17 +19,25 @@ namespace tsubasa
         public static void UpdateLogDatatime()
         {
             now = string.Format("{0:d}", System.DateTime.Now).Replace('/', '_');
-            logfile = ".\\" + now + ".log";
+            logfile = "./" + now + ".log";
         }
 
-        public static void Log<T>(string input)
+        public static void Log<T>(string input,bool consoleOutput = false)
         {
             Log("", $"[LOG][{typeof(T)}]{input}");
+            if (consoleOutput)
+            {
+                Console.WriteLine($"[{now}][{typeof(T)}]:{input}");
+            }
         }
 
-        public static void Error<T>(string input)
+        public static void Error<T>(string input, bool consoleOutput = false)
         {
             Log("", $"[Error][{typeof(T)}]{input}");
+            if (consoleOutput)
+            {
+                Console.WriteLine($"[{now}][{typeof(T)}]:{input}");
+            }
         }
 
         public static void StateOutput(string input)
@@ -83,7 +91,7 @@ namespace tsubasa
             }
             else
             {
-                logFilePath = $".\\{fileName}_{now}.log";
+                logFilePath = $"./{fileName}_{now}.log";
             }
              
             try
