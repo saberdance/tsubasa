@@ -28,7 +28,7 @@ namespace tsubasa
             if (!string.IsNullOrEmpty(token))
             {
                 //需要token就添加token
-                _httpClient.DefaultRequestHeaders.Add("Token", token);
+                _httpClient.DefaultRequestHeaders.Add("client-token-user", token);
             }
         }
 

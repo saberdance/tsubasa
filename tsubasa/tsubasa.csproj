@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <Configurations>Debug;Release;Release_Win;Release_Linux;Debug_Win;Debug_Linux</Configurations>
-    <Platforms>AnyCPU;x64</Platforms>
+    <Platforms>AnyCPU;x64;x86</Platforms>
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
@@ -25,6 +25,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Linux|x64'">
     <DefineConstants>DEBUG;TRACE;_LINUX</DefineConstants>
     <Optimize>false</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
 
 </Project>
