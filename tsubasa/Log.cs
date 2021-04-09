@@ -24,7 +24,7 @@ namespace tsubasa
 
         public static void Log<T>(string input,bool consoleOutput = false)
         {
-            Log("", $"[LOG][{typeof(T)}]{input}");
+            Log("", $"[LOG][{typeof(T).Name}]{input}");
             if (consoleOutput)
             {
                 Console.WriteLine($"[{now}][{typeof(T)}]:{input}");
@@ -33,7 +33,7 @@ namespace tsubasa
 
         public static void Error<T>(string input, bool consoleOutput = false)
         {
-            Log("", $"[Error][{typeof(T)}]{input}");
+            Log("", $"[Error][{typeof(T).Name}]{input}");
             if (consoleOutput)
             {
                 Console.WriteLine($"[{now}][{typeof(T)}]:{input}");

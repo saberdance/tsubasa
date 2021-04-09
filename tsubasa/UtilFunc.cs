@@ -91,7 +91,8 @@ namespace tsubasa
             }
             catch (Exception ex)
             {
-                throw new Exception("GetMD5HashFromFile() fail,error:" + ex.Message);
+                Logger.Error("MD5 Failed:"+ex.Message);
+                return "";
             }
         }
 

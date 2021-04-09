@@ -32,6 +32,11 @@ namespace tsubasa
             }
         }
 
+        public void AddSingleHeader(string headerKey,string value)
+        {
+            _httpClient.DefaultRequestHeaders.Add(headerKey, value);     
+        }
+
         public async Task<bool> DownloadFile(string uri, string filePath)
         {
             try
@@ -81,6 +86,28 @@ namespace tsubasa
         {
             try
             {
+                var response = await _httpClient.PostAsync(router, content);
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsStringAsync();
+            }
+            catch (HttpRequestException e)
+            {
+                Logger.Error<WebHelper>($"POST通讯错误:{e.Message}");
+                return null;
+            }
+            catch (Exception e)
+            {
+                Logger.Error<WebHelper>($"POST非通讯错误:{e.Message}");
+                return null;
+            }
+        }
+
+        public async Task<string> PostJsonRequest(string router, string jsonString)
+        {
+            try
+            {
+                HttpContent content = new StringContent(jsonString);
+                content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
                 var response = await _httpClient.PostAsync(router, content);
                 response.EnsureSuccessStatusCode();
                 return await response.Content.ReadAsStringAsync();
