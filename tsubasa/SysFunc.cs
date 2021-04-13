@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
@@ -90,6 +91,18 @@ namespace tsubasa
         {
             System.IO.DriveInfo disk = new System.IO.DriveInfo(diskName);
             return disk.AvailableFreeSpace;
+        }
+
+        public static string GetIpAddr(bool isRequire192 = true)
+        {
+
+            var IpAddrs = NetworkInterface.GetAllNetworkInterfaces()
+            .Select(p => p.GetIPProperties())
+            .SelectMany(p => p.UnicastAddresses)
+            .Where(p => p.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork && !System.Net.IPAddress.IsLoopback(p.Address));
+
+            return IpAddrs.Where(o => o.Address.ToString().Contains("192")).FirstOrDefault().Address.ToString();
+            
         }
     }
 #if _WINDOWS

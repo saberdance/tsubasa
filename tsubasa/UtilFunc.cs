@@ -39,7 +39,7 @@ namespace tsubasa
 
         public static string MD5String(string src)
         {
-            System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
+            MD5 md5 = new MD5CryptoServiceProvider();
             byte[] srcByte = Encoding.UTF8.GetBytes(src);
             byte[] retVal = md5.ComputeHash(srcByte);
 
@@ -49,6 +49,38 @@ namespace tsubasa
                 sb.Append(retVal[i].ToString("x2"));
             }
             return sb.ToString();
+        }
+
+        public static string MD5File(string path)
+        {
+            if (!File.Exists(path))
+            {
+                return null;
+            }
+            byte[] fileBinary = File.ReadAllBytes(path);
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] retVal = md5.ComputeHash(fileBinary);
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < retVal.Length; i++)
+            {
+                sb.Append(retVal[i].ToString("x2"));
+            }
+            return sb.ToString();
+        }
+
+        public static byte[] MD5Byte(string src)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] srcByte = Encoding.UTF8.GetBytes(src);
+            return md5.ComputeHash(srcByte);    
+        }
+
+        public static byte[] Sha256Byte(string src)
+        {
+            SHA256 sha256 = SHA256.Create();
+            byte[] srcByte = Encoding.UTF8.GetBytes(src);
+            return sha256.ComputeHash(srcByte);
         }
 
         public static string FillStringWithToken(string orgStr, string tokenStr, int targetLength, bool isAppend = false)
@@ -112,7 +144,7 @@ namespace tsubasa
                     return result;
                 result = tmpstr.Remove(endindex)+@"}";
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return string.Empty;
             }

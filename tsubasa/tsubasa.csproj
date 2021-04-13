@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <Configurations>Debug;Release;Release_Win;Release_Linux;Debug_Win;Debug_Linux</Configurations>
+    <Configurations>Debug;Release;Release_Win;Release_Linux;Debug_Win;Debug_Linux;Windows_Debug</Configurations>
     <Platforms>AnyCPU;x64;x86</Platforms>
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
@@ -30,5 +30,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Windows_Debug|x86'">
+    <DefineConstants>TRACE;DEBUG;_WINDOWS</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
+  </ItemGroup>
 
 </Project>

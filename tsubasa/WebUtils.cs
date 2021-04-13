@@ -123,5 +123,27 @@ namespace tsubasa
                 return null;
             }
         }
+
+        public async Task<string> PutJsonRequest(string router, string jsonString)
+        {
+            try
+            {
+                HttpContent content = new StringContent(jsonString);
+                content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                var response = await _httpClient.PutAsync(router, content);
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsStringAsync();
+            }
+            catch (HttpRequestException e)
+            {
+                Logger.Error<WebHelper>($"PUT通讯错误:{e.Message}");
+                return null;
+            }
+            catch (Exception e)
+            {
+                Logger.Error<WebHelper>($"PUT非通讯错误:{e.Message}");
+                return null;
+            }
+        }
     }
 }

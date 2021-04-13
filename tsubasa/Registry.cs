@@ -20,7 +20,9 @@ namespace tsubasa
         }
         public static object QueryRegisrtyValue(RegistryKey key, string Value)
         {
+#pragma warning disable CA1416 // 验证平台兼容性
             return key.GetValue(Value);
+#pragma warning restore CA1416 // 验证平台兼容性
         }
         public static string QueryRegisrtyString(RegistryKey key, string Value)
         {
@@ -39,9 +41,11 @@ namespace tsubasa
         {
             try
             {
+#pragma warning disable CA1416 // 验证平台兼容性
                 return parentKey.CreateSubKey(keyName);
+#pragma warning restore CA1416 // 验证平台兼容性
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }
@@ -50,10 +54,12 @@ namespace tsubasa
         {
             try
             {
+#pragma warning disable CA1416 // 验证平台兼容性
                 parentKey.SetValue(valueName, value);
+#pragma warning restore CA1416 // 验证平台兼容性
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -61,7 +67,7 @@ namespace tsubasa
     }
 }
 #else
-namespace Yggdrasill
+namespace tsubasa
 {
     /// <summary>
     /// 非Windows系统无法访问注册表
