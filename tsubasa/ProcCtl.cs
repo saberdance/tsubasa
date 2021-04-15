@@ -169,26 +169,36 @@ namespace tsubasa
             }
             return null;
         }
-        public static void RunCmdAsync(string cmd, DataReceivedEventHandler outputReciver, DataReceivedEventHandler errorReciver,EventHandler finishHandler)
+        public static void RunCmdAsync(string cmd, DataReceivedEventHandler outputReciver, DataReceivedEventHandler errorReciver = null,EventHandler finishHandler = null)
         {
             Process proc = new Process();
             System.Console.OutputEncoding = System.Text.Encoding.Default;
             proc.StartInfo.CreateNoWindow = true;
             proc.StartInfo.FileName = "cmd.exe";
-            proc.StartInfo.Arguments = cmd;
+            proc.StartInfo.WorkingDirectory = ".";
+            //proc.StartInfo.Arguments = cmd;
             proc.StartInfo.UseShellExecute = false;
-            proc.StartInfo.RedirectStandardError = true;
             proc.StartInfo.RedirectStandardInput = true;
             proc.StartInfo.RedirectStandardOutput = true;
             proc.OutputDataReceived += outputReciver;
-            proc.ErrorDataReceived += errorReciver;
-            proc.EnableRaisingEvents = true;
-            proc.Exited += (finishHandler);   
+            if (errorReciver != null)
+            {
+                proc.ErrorDataReceived += errorReciver;
+                proc.StartInfo.RedirectStandardError = true;
+            }                         
+            if (finishHandler != null)
+            {
+                proc.EnableRaisingEvents = true;
+                proc.Exited += (finishHandler);
+            }
             proc.Start();
             proc.StandardInput.WriteLine(cmd);
-            proc.StandardInput.WriteLine("exit");
+            //proc.StandardInput.WriteLine("exit");
             proc.BeginOutputReadLine();
-            proc.BeginErrorReadLine();
+            if (errorReciver != null)
+            {
+                proc.BeginErrorReadLine();
+            }
         }
 
         public static void RunProcAsync(string procPath,string args, out BinaryReader outputReciver, out BinaryReader errorReciver, EventHandler finishHandler)
