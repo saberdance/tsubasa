@@ -11,7 +11,9 @@ namespace tsubasa
     public static class Logger
     {
         private static string now = string.Format("{0:d}", System.DateTime.Now).Replace('/', '_');
-        public static string logfile = "./" + now + ".log";
+        public static string logdir = "./logs";
+        public static string logfile = $"{logdir}/{now}.log";
+        private static bool logdirExists = false;
         static ReaderWriterLockSlim LogWriteLock = new ReaderWriterLockSlim();
         /// <summary>
         /// 用于跨天
@@ -19,7 +21,22 @@ namespace tsubasa
         public static void UpdateLogDatatime()
         {
             now = string.Format("{0:d}", System.DateTime.Now).Replace('/', '_');
-            logfile = "./" + now + ".log";
+            logfile = $"{logdir}/{now}.log";
+        }
+
+        public static void InitLogFile(string fileName)
+        {
+            string logFilePath = $"{logdir}/{fileName}_{now}.log";
+            if (File.Exists(logFilePath))
+            {
+                try
+                {
+                    File.Delete(logFilePath);
+                }
+                catch (Exception)
+                {
+                }
+            }
         }
 
         public static void Log<T>(string input,bool consoleOutput = false)
@@ -81,8 +98,23 @@ namespace tsubasa
         {
             Log("", "[LOG]------------------------------------------");
         }
+        //为了照顾以前的代码，这里加入了一个写的非常丑的目录存在性判断，需要修正
         public static void Log(string fileName,string input)
         {
+            if (!logdirExists)
+            {
+                try
+                {
+                    if (!Directory.Exists(logdir))
+                    {
+                        Directory.CreateDirectory(logdir);
+                        logdirExists = true;
+                    }
+                }
+                catch (Exception)
+                {
+                }               
+            }                  
             string logFilePath;
             UpdateLogDatatime();
             if (fileName == "")
@@ -91,7 +123,7 @@ namespace tsubasa
             }
             else
             {
-                logFilePath = $"./{fileName}_{now}.log";
+                logFilePath = $"{logdir}/{fileName}_{now}.log";
             }
              
             try
