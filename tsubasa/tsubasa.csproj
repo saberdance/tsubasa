@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <Configurations>Debug;Release;Release_Win;Release_Linux;Debug_Win;Debug_Linux;Windows_Debug</Configurations>
     <Platforms>AnyCPU;x64;x86</Platforms>
     <LangVersion>preview</LangVersion>
@@ -38,6 +38,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
+    <PackageReference Include="StackExchange.Redis" Version="2.2.62" />
   </ItemGroup>
 
 </Project>
