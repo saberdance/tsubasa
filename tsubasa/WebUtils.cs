@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,6 +31,14 @@ namespace tsubasa
                 //需要token就添加token
                 _httpClient.DefaultRequestHeaders.Add("client-token-user", token);
             }
+        }
+
+        public void AddCreadentials(string username, string password)
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                "Basic",
+                Convert.ToBase64String(Encoding.UTF8.GetBytes($"{username}:{password}")
+                ));
         }
 
         public void AddSingleHeader(string headerKey,string value)
