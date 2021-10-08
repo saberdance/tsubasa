@@ -168,6 +168,35 @@ namespace tsubasa
             }
             return returnStr;
         }
-    }
+
+        /// <summary>
+        /// 从字符串中提取标点符号，换行和中文
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string getChineseStr(string input)
+        {
+            string result = null;
+            string s = input.Replace("<br>", "\n");
+            for (int i = 0; i < s.Length; i++)
+            {
+                Regex rx = new Regex("^[\u4e00-\u9fa5]$");//中文字符unicode范围  
+                if (rx.IsMatch(s[i].ToString())||IsPunctuation(s[i].ToString()))
+                {
+                    result += s[i].ToString();
+                }
+            }
+            return result;
+        }
+
+        private static bool IsPunctuation(string s) => s switch
+        {
+            "。" or "," or "，" or "、" or "：" or "；" or "\n" => true,
+            var ss when string.IsNullOrWhiteSpace(ss)           => true,
+            _                                                   => false,
+        };
+
+    //return s == "," || s == "，" || string.IsNullOrWhiteSpace(s) || s == "、" || s[i].ToString() == "：" || s[i].ToString() == "；" || s[i].ToString() == "\n";
+}
 }
 

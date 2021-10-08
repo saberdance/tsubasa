@@ -82,6 +82,8 @@ namespace tsubasa
             {
                 var response = await _httpClient.GetAsync(router);
                 response.EnsureSuccessStatusCode();
+                Console.WriteLine($"URL:[{response.RequestMessage.RequestUri}]");
+                //Console.WriteLine($"URL:[{response.Headers.Location.ToString()}]");
                 if (fullRet)
                 {
                     return response.ToString();
@@ -116,7 +118,6 @@ namespace tsubasa
                 response.EnsureSuccessStatusCode();
 
                 return (await response.Content.ReadAsStringAsync(),response.Headers.ToString());
-
             }
             catch (HttpRequestException e)
             {
