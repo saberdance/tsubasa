@@ -21,10 +21,15 @@ namespace tsubasa
 
     public class WebHelper
     {
-        private readonly HttpClient _httpClient = new HttpClient();
+        private readonly HttpClient _httpClient = null;
 
         public WebHelper(string rootUri,string token = null)
         {
+            HttpClientHandler handler = new HttpClientHandler();
+            handler.AllowAutoRedirect = true;
+
+            _httpClient = new HttpClient(handler);
+
             _httpClient.BaseAddress = new(rootUri);
             if (!string.IsNullOrEmpty(token))
             {
@@ -71,13 +76,21 @@ namespace tsubasa
             
         }
 
-        public async Task<string> GetRequest(string router)
+        public async Task<string> GetRequest(string router,bool fullRet = false)
         {
             try
             {
                 var response = await _httpClient.GetAsync(router);
                 response.EnsureSuccessStatusCode();
-                return await response.Content.ReadAsStringAsync();
+                if (fullRet)
+                {
+                    return response.ToString();
+                }
+                else
+                {
+                    return await response.Content.ReadAsStringAsync();
+                }
+                
             }
             catch (HttpRequestException e)
             {
@@ -88,6 +101,32 @@ namespace tsubasa
             {
                 Logger.Error<WebHelper>($"GET非通讯错误:{e.Message}");
                 return null;
+            }
+        }
+
+        public async Task<(string,string)> GetFullRequest(string router)
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync(router);
+
+                Console.WriteLine("请求状态:"+response.StatusCode.ToString());
+                Console.WriteLine("状态码:"+((int)response.StatusCode));
+
+                response.EnsureSuccessStatusCode();
+
+                return (await response.Content.ReadAsStringAsync(),response.Headers.ToString());
+
+            }
+            catch (HttpRequestException e)
+            {
+                Logger.Error<WebHelper>($"GET通讯错误:{e.Message}");
+                return (null,null) ;
+            }
+            catch (Exception e)
+            {
+                Logger.Error<WebHelper>($"GET非通讯错误:{e.Message}");
+                return (null,null);
             }
         }
 
